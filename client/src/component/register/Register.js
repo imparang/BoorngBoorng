@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react'
+import { Container } from 'reactstrap'
 
-const Register = (props) => {
+const Register = props => {
   return (
-    <div>
+    <Container>
       <h2>회원가입</h2>
-    </div>
-  );
-};
+    </Container>
+  )
+}
 
-export default Register;
+export default Register
