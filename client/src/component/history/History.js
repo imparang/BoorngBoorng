@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react'
+import { Container } from 'reactstrap'
 
-const History = (props) => {
+const History = props => {
   return (
-    <div>
+    <Container style={{ height: '626px' }}>
       <h2>사용자 구매내역</h2>
-    </div>
-  );
-};
+    </Container>
+  )
+}
 
-export default History;
+export default History
