@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react'
+import { Container } from 'reactstrap'
 
-const Product = (props) => {
+const Product = props => {
   return (
-    <div>
+    <Container style={{ height: '626px' }}>
       <h2>상품</h2>
-    </div>
-  );
-};
+    </Container>
+  )
+}
 
-export default Product;
+export default Product
