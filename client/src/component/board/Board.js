@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react'
+import { Container } from 'reactstrap'
 
-const Board = (props) => {
+const Board = props => {
   return (
-    <div>
+    <Container style={{ height: '626px' }}>
       <h2>게시판</h2>
-    </div>
-  );
-};
+    </Container>
+  )
+}
 
-export default Board;
+export default Board
