@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react'
+import { Container } from 'reactstrap'
 
-const Naver = (props) => {
+const Naver = props => {
   return (
-    <div>
+    <Container style={{ height: '626px' }}>
       <h2>최저가 상품 조회 및 등록 하기</h2>
-    </div>
-  );
-};
+    </Container>
+  )
+}
 
-export default Naver;
+export default Naver
