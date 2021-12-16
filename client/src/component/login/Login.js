@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react'
+import { Container } from 'reactstrap'
 
-const Login = (props) => {
+const Login = props => {
   return (
-    <div>
+    <Container style={{ height: '626px' }}>
       <h2>로그인</h2>
-    </div>
-  );
-};
+    </Container>
+  )
+}
 
-export default Login;
+export default Login
