@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { Form, Input, Nav, Navbar, NavbarBrand, NavItem } from 'reactstrap'
+import { NavLink } from 'react-router-dom'
+import { Form, Input, Nav, Navbar, NavItem } from 'reactstrap'
+
+import '../scss/header.scss'
 
 class Header extends Component {
   render() {
@@ -33,9 +35,11 @@ class Header extends Component {
                 alignItems: 'center',
                 flex: 1
               }}
+              className="search-product"
             >
               <Form style={{ width: '100%', maxWidth: '300px' }}>
-                <Input placeholder="상품을 검색하세요" block="true" />
+                <i className="bx bx-search"></i>
+                <Input placeholder="상품을 검색해보세요" block="true" />
               </Form>
             </NavItem>
             <NavItem
@@ -45,9 +49,18 @@ class Header extends Component {
                 alignItems: 'center'
               }}
             >
-              <NavLink style={{ textAlign: 'center' }} to="/board">
-                게시판
+              <NavLink style={{ textAlign: 'center' }} to="/store">
+                스토어
               </NavLink>
+            </NavItem>
+            <NavItem
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <NavLink to="/board"> 커뮤니티</NavLink>
             </NavItem>
             <NavItem
               style={{
@@ -66,15 +79,6 @@ class Header extends Component {
               }}
             >
               <NavLink to="/profile">마이페이지</NavLink>
-            </NavItem>
-            <NavItem
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <NavLink to="/naverApi">상품등록</NavLink>
             </NavItem>
           </Nav>
         </Navbar>
