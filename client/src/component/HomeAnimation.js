@@ -4,6 +4,7 @@ import '../scss/animation.scss'
 const HomeAnimation = () => {
   return (
     <div className="animation-container">
+      <h2>부릉부릉 이미 택배 가고 있습니다</h2>
       <div className="animation-car-wrapper">
         <div className="animation-car-wrapper_inner">
           <div className="animation-car_outter">
