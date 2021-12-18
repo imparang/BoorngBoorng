@@ -1,0 +1,33 @@
+%form-base {
+  form {
+    position: relative;
+
+    .bx-search {
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #505050;
+      pointer-events: none;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      height: 40px;
+      padding: 0 16px 0 40px;
+      background-color: #fff;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      border: 1px solid #ced4da;
+      appearance: none;
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+      }
+    }
+  }
+}
