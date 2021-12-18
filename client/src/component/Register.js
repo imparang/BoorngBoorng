@@ -3,7 +3,7 @@ import { Container } from 'reactstrap'
 
 const Register = props => {
   return (
-    <Container>
+    <Container style={{ height: '600px', marginBottom: '16px' }}>
       <h2>회원가입</h2>
     </Container>
   )
