@@ -1,20 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import '../../scss/board/board.scss'
 
 const CommunityCategory = () => {
+  console.log('CommunityCategory')
   return (
     <div className="community-category">
       <ul className="community-category-list">
         <li className="community-category-item">
-          <Link to="/board">자유주제</Link>
+          <NavLink to="/board">자유주제</NavLink>
         </li>
         <li className="community-category-item">
-          <Link to="/board">공지사항</Link>
+          <NavLink to="/board/notice">공지사항</NavLink>
         </li>
         <li className="community-category-item">
-          <Link to="/board">질의응답</Link>
+          <NavLink to="/board/qna">질의응답</NavLink>
         </li>
       </ul>
     </div>
