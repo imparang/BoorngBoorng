@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  margin-bottom: 40px;
 
   &-wrapper {
     width: 100%;
@@ -15,7 +16,7 @@
     border: 1px solid #ced4da;
     appearance: none;
 
-    i {
+    .bx-hash {
       position: absolute;
       top: 50%;
       left: 8px;
@@ -24,6 +25,15 @@
       color: #505050;
       pointer-events: none;
     }
+
+    .filterbox-placeholder {
+      display: flex;
+      align-items: center;
+      height: inherit;
+      font-size: 16px;
+      color: #6c757d;
+      user-select: none;
+    }
   }
 
   &-list {
@@ -31,12 +41,37 @@
     align-items: center;
     height: 40px;
     margin: 0;
+    padding: 0;
+    gap: 12px;
 
     li {
-      display: inline-block;
-      height: 20px;
-      padding: 0 4px;
-      background-color: #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 24px;
+
+      button {
+        position: relative;
+        display: inline-block;
+        padding: 0 8px;
+        line-height: 24px;
+        border-radius: 0.25rem;
+        text-align: center;
+        background-color: #e4e4e4;
+        transition: background-color 200ms ease-in-out;
+
+        .bx-x {
+          flex: none;
+          padding-left: 6px;
+          margin-top: -3px;
+          font-size: 16px;
+          vertical-align: middle;
+        }
+
+        &:hover {
+          background-color: #d4d4d4;
+        }
+      }
     }
   }
 
@@ -55,8 +90,10 @@
     transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
 
     i {
-      flex: none;
-      margin-right: 6px;
+      flex: 1;
+      margin-right: 4px;
+      margin-top: -2px;
+      vertical-align: middle;
     }
 
     &:hover {
