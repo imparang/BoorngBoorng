@@ -7,8 +7,9 @@ import SearchPost from './SearchPost'
 import TagBox from './TagBox'
 
 const Board = props => {
+  console.log('Board')
   return (
-    <Container style={{ height: '600px', marginBottom: '16px' }}>
+    <Container style={{ marginBottom: '16px', position: 'relative' }}>
       <h2 className="visually-hidden">게시판</h2>
       <Row>
         <Col md="2">
