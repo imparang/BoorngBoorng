@@ -27,6 +27,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        word-break: keep-all;
       }
 
       .post-content {
@@ -36,6 +37,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        word-break: keep-all;
       }
 
       .post-date {
@@ -78,10 +80,11 @@
         justify-content: center;
         align-items: center;
         font-size: 16px;
+        color: #6c757d;
 
         i {
           display: inline-block;
-          margin: -1px 4px 0 0;
+          margin: 0 4px 0 0;
           color: #343a40;
           font-weight: 500;
           font-size: 18px;
