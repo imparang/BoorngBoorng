@@ -53,6 +53,10 @@ a {
   color: #505050;
   text-decoration: none;
   margin-left: 40px;
+  transition: color 200ms ease-in-out;
+}
+a:hover {
+  color: #0d6efd;
 }
 
 a.active {
