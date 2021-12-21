@@ -7,14 +7,19 @@ import './css/toy.css'
 import Board from './component/Community/Board'
 import Login from './component/Login'
 import Register from './component/Register'
-import Product from './component/Product'
-import Cart from './component/Cart'
+import Cart from './component/Cart/Cart'
 import { useState } from 'react'
 import HomeAnimation from './component/HomeAnimation'
 import { Container } from 'reactstrap'
-import Profile from './component/Profile'
-import Store from './component/Store'
+import Profile from './component/User/Profile'
+import Store from './component/Store/Store'
 import AddBoard from './component/Community/AddBoard'
+import Pwd from './component/User/Pwd'
+import UpdateUser from './component/User/UpdateUser'
+import ProductDetail from './component/Store/ProductDetail'
+import Order from './component/Order/Order'
+import PostDetail from './component/Community/PostDetail'
+import UpdateBoard from './component/Community/UpdateBoard'
 
 function App() {
   const [userId, setUserId] = useState('')
@@ -25,12 +30,17 @@ function App() {
         <Route path="/" element={<HomeAnimation />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
-        <Route path="/store" element={<Store userId={userId} />} />
-        <Route path="/product" element={<Product userId={userId} />} />
         <Route path="/board" element={<Board />} />
+        <Route path="/board/:id" element={<PostDetail />} />
         <Route path="/board/insert" element={<AddBoard />} />
+        <Route path="/board/update" element={<UpdateBoard />} />
+        <Route path="/store" element={<Store userId={userId} />} />
+        <Route path="/store/product/:productId" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart userId={userId} />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/user" element={<Profile />} />
+        <Route path="/user/pwd" element={<Pwd />} />
+        <Route path="/user/update" element={<UpdateUser />} />
       </Routes>
       <Footer />
     </Container>
