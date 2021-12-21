@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
   Button,
@@ -12,12 +12,12 @@ import {
 } from 'reactstrap'
 
 import { useInput } from '../hooks/useInput'
-import { USER_SIGNUP_REQUEST } from '../redux/types'
+import { EMAIL_CHECK_REQUEST, USER_SIGNUP_REQUEST } from '../redux/types'
 
 const Register = () => {
   const dispatch = useDispatch()
-  const [isValid, setIsValid] = useState('')
-  const [emailCheck, setEmailCheck] = useState(true)
+  const { emailCheckDone, emailCheckError } = useSelector(state => state.user)
+
   const [email, onChangeEmail] = useInput('')
   const [password, onChangePassword] = useInput('')
   const [name, onChangeName] = useInput('')
@@ -25,10 +25,15 @@ const Register = () => {
   const [org, onChangeOrg] = useInput('')
   const [phone, onChangePhone] = useInput('')
 
-  useEffect(() => {
-    if (email) setEmailCheck(false)
-    else setEmailCheck(true)
-  }, [email])
+  const emailCheck = useCallback(() => {
+    dispatch({
+      type: EMAIL_CHECK_REQUEST,
+      data: {
+        user_email1: email,
+        user_email2: email
+      }
+    })
+  }, [dispatch, email])
 
   const signUp = useCallback(
     e => {
@@ -61,16 +66,16 @@ const Register = () => {
             type="email"
             maxLength={30}
             minLength={4}
-            valid={isValid === true && isValid}
-            invalid={isValid === false && isValid}
+            valid={emailCheckDone && emailCheckDone}
+            invalid={emailCheckError && emailCheckError}
             value={email}
             onChange={onChangeEmail}
           />
           <FormFeedback
-            valid={isValid === true && isValid}
-            invalid={isValid === false && isValid}
+            valid={emailCheckDone && emailCheckDone}
+            invalid={emailCheckError && emailCheckError}
           >
-            {typeof isValid === 'boolean' && isValid
+            {emailCheckError
               ? '사용가능한 이메일입니다.'
               : '이미 존재하는 이메일입니다.'}
           </FormFeedback>
@@ -78,7 +83,8 @@ const Register = () => {
             className="email-check-button"
             color="success"
             block={true}
-            disabled={emailCheck}
+            disabled={!email}
+            onClick={emailCheck}
           >
             이메일 인증하기
           </Button>
