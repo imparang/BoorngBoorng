@@ -1,0 +1,97 @@
+.wrap {
+  position: relative;
+  .inner {
+    margin: 0 auto;
+    .product-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 500;
+
+      .photo {
+        margin-left: 20px;
+        padding: 30px;
+        width: 540px;
+        height: 540px;
+        object-fit: contain;
+      }
+      .product-details {
+        margin: 40px 20px 0 120px;
+        .title {
+          color: #000;
+          font-size: 28px;
+          margin-bottom: 1rem;
+          word-break: keep-all;
+        }
+        .price {
+          font-size: 24px;
+          color: #0d6efd;
+        }
+        .pay {
+          font-size: 12px;
+          margin-bottom: 4px;
+        }
+
+        input {
+          width: 100%;
+          margin-bottom: 14px;
+        }
+        .btn-primary {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+        .coupon {
+          p {
+            font-size: 14px;
+            margin-bottom: 10px;
+          }
+        }
+        .kacbae {
+          font-size: 14px;
+          margin-bottom: 10px;
+        }
+        .strong {
+          color: #000;
+        }
+        .shipping {
+          display: flex;
+          margin-bottom: 4px;
+
+          p {
+            margin: 0 0 0 6px;
+            font-weight: 500;
+          }
+        }
+
+        .content {
+          margin-bottom: 10px;
+        }
+        .tags {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 4px;
+
+          span {
+            font-weight: 500;
+          }
+        }
+        .soldout {
+          margin-bottom: 4px;
+
+          strong {
+            margin-left: 4px;
+          }
+        }
+        .reservation {
+          margin-bottom: 4px;
+        }
+        .fontsize {
+          margin-right: 4px;
+          font-weight: 700;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
