@@ -9,7 +9,9 @@ import TagBox from './TagBox'
 const Board = props => {
   console.log('Board')
   return (
-    <Container style={{ marginBottom: '16px', position: 'relative' }}>
+    <Container
+      style={{ minHeight: '600px', marginBottom: '16px', position: 'relative' }}
+    >
       <h2 className="visually-hidden">게시판</h2>
       <Row>
         <Col md="2">
