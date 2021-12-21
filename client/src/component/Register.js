@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
   Button,
@@ -11,19 +12,45 @@ import {
 } from 'reactstrap'
 
 import { useInput } from '../hooks/useInput'
+import { USER_SIGNUP_REQUEST } from '../redux/types'
 
 const Register = () => {
+  const dispatch = useDispatch()
   const [isValid, setIsValid] = useState('')
   const [emailCheck, setEmailCheck] = useState(true)
   const [email, onChangeEmail] = useInput('')
+  const [password, onChangePassword] = useInput('')
+  const [name, onChangeName] = useInput('')
+  const [major, onChangeMajor] = useInput('')
+  const [org, onChangeOrg] = useInput('')
+  const [phone, onChangePhone] = useInput('')
 
   useEffect(() => {
     if (email) setEmailCheck(false)
     else setEmailCheck(true)
   }, [email])
+
+  const signUp = useCallback(
+    e => {
+      e.preventDefault()
+      dispatch({
+        type: USER_SIGNUP_REQUEST,
+        data: {
+          user_email1: email,
+          user_email2: email,
+          user_password: password,
+          user_name: name,
+          user_major: major,
+          user_phone: phone,
+          user_org: org
+        }
+      })
+    },
+    [dispatch, email, password, name, major, phone, org]
+  )
   return (
     <Container style={{ marginBottom: '16px', maxWidth: '400px' }}>
-      <Form className="user-form" onSubmit={e => e.preventDefault()}>
+      <Form className="user-form" onSubmit={signUp}>
         <h2>회원가입</h2>
         <FormGroup>
           <Label for="email">이메일</Label>
@@ -66,17 +93,21 @@ const Register = () => {
             type="password"
             minLength={8}
             maxLength={100}
+            onChange={onChangePassword}
+            value={password}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="password-check">비밀번호 확인</Label>
+          <Label for="name">이름</Label>
           <Input
-            id="password-check"
-            name="password-check"
-            placeholder="비밀번호를 확인해주세요"
-            type="password"
-            minLength={8}
-            maxLength={100}
+            id="name"
+            name="name"
+            placeholder="이름을 확인해주세요"
+            type="text"
+            minLength={1}
+            maxLength={30}
+            onChange={onChangeName}
+            value={name}
           />
         </FormGroup>
         <FormGroup>
@@ -88,6 +119,8 @@ const Register = () => {
             type="phone"
             minLength={8}
             maxLength={100}
+            onChange={onChangePhone}
+            value={phone}
           />
         </FormGroup>
         <FormGroup>
@@ -99,6 +132,8 @@ const Register = () => {
             type="text"
             minLength={1}
             maxLength={20}
+            onChange={onChangeOrg}
+            value={org}
           />
         </FormGroup>
         <FormGroup>
@@ -110,6 +145,8 @@ const Register = () => {
             type="text"
             minLength={1}
             maxLength={100}
+            onChange={onChangeMajor}
+            value={major}
           />
         </FormGroup>
 
