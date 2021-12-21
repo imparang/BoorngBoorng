@@ -3,7 +3,8 @@ import Post from './Post'
 
 import '../../scss/board/post-container.scss'
 import { Button } from 'reactstrap'
-import PaginationContainer from './PaginationContainer'
+import PaginationContainer from '../PaginationContainer'
+import { useNavigate } from 'react-router-dom'
 
 const PostContainer = () => {
   const [posts, setPosts] = useState([
@@ -125,6 +126,8 @@ const PostContainer = () => {
       insert_date: '2021-12-17 16:01:50'
     }
   ])
+
+  const navigate = useNavigate()
   console.log('postconainer')
   return (
     <section className="post-list">
@@ -132,10 +135,14 @@ const PostContainer = () => {
       {posts.length
         ? posts.map(post => <Post key={post.id} post={post} />)
         : '게시글이 없습니다.'}
-      <Button className="add-button" color="primary">
+      <Button
+        className="add-button"
+        color="primary"
+        onClick={() => navigate('/board/insert')}
+      >
         글쓰기
       </Button>
-      <PaginationContainer />
+      <PaginationContainer link={'board'} size="sm" />
     </section>
   )
 }
