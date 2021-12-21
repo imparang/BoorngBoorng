@@ -1,10 +1,16 @@
 import {
   USER_SIGNUP_REQUEST,
   USER_SIGNUP_SUCCESS,
-  USER_SIGNUP_FAILURE
+  USER_SIGNUP_FAILURE,
+  EMAIL_CHECK_REQUEST,
+  EMAIL_CHECK_SUCCESS,
+  EMAIL_CHECK_FAILURE
 } from '../types'
 
 const initial = {
+  emailCheckLoading: false,
+  emailCheckDone: false,
+  emailCheckError: null,
   signUpLoading: false,
   signUpDone: false,
   signUpError: null,
@@ -13,6 +19,25 @@ const initial = {
 
 const userReducer = (state = initial, action) => {
   switch (action.type) {
+    case EMAIL_CHECK_REQUEST:
+      return {
+        ...state,
+        emailCheckLoading: true,
+        emailCheckDone: false,
+        emailCheckError: null
+      }
+    case EMAIL_CHECK_SUCCESS:
+      return {
+        ...state,
+        emailCheckLoading: false,
+        emailCheckDone: true
+      }
+    case EMAIL_CHECK_FAILURE:
+      return {
+        ...state,
+        emailCheckLoading: false,
+        emailCheckError: true
+      }
     case USER_SIGNUP_REQUEST:
       return {
         ...state,
