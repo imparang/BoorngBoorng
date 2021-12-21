@@ -15,6 +15,8 @@ const AddBoard = () => {
             name="title"
             placeholder="제목을 입력해주세요"
             type="text"
+            maxLength={50}
+            minLength={1}
           />
         </FormGroup>
 
@@ -31,6 +33,8 @@ const AddBoard = () => {
               name="Wiriter"
               placeholder="작성자명을 입력해주세요"
               type="text"
+              maxLength={30}
+              minLength={1}
             />
           </FormGroup>
           <FormGroup>
@@ -40,6 +44,8 @@ const AddBoard = () => {
               name="password"
               placeholder="비밀번호를 입력해주세요"
               type="password"
+              maxLength={10}
+              minLength={1}
             />
           </FormGroup>
         </FormGroup>
