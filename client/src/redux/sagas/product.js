@@ -1,4 +1,7 @@
 import {
+  PRODUCT_SEARCH_REQUEST,
+  PRODUCT_SEARCH_SUCCESS,
+  PRODUCT_SEARCH_FAILURE,
   PRODUCT_SELECT_REQUEST,
   PRODUCT_SELECT_SUCCESS,
   PRODUCT_SELECT_FAILURE,
@@ -11,6 +14,30 @@ import {
 } from '../types'
 import { all, fork, call, put, takeLatest } from 'redux-saga/effects'
 import getAxiosApi from '../../api/index'
+
+// product selectList
+function productSearchApi(data) {
+  return getAxiosApi('/product?type=list', data)
+}
+
+function* productSearch(action) {
+  try {
+    const result = yield call(productSearchApi, action.data)
+    yield put({
+      type: PRODUCT_SEARCH_SUCCESS,
+      data: result
+    })
+  } catch (error) {
+    yield put({
+      type: PRODUCT_SEARCH_FAILURE,
+      data: error
+    })
+  }
+}
+
+function* watchProductSearch() {
+  yield takeLatest(PRODUCT_SEARCH_REQUEST, productSearch)
+}
 
 // product selectPage
 function productSelectApi(data) {
@@ -86,6 +113,7 @@ function* watchProductCategory() {
 
 export default function* productSaga() {
   yield all([
+    fork(watchProductSearch),
     fork(watchProductSelect),
     fork(watchProductCount),
     fork(watchProductCategory)

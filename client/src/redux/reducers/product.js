@@ -1,4 +1,7 @@
 import {
+  PRODUCT_SEARCH_REQUEST,
+  PRODUCT_SEARCH_SUCCESS,
+  PRODUCT_SEARCH_FAILURE,
   PRODUCT_SELECT_REQUEST,
   PRODUCT_SELECT_SUCCESS,
   PRODUCT_SELECT_FAILURE,
@@ -11,13 +14,16 @@ import {
 } from '../types'
 
 const initial = {
+  productSearchLoading: false,
+  productSearchDone: false,
+  productSearchError: null,
   productSelectLoading: false,
   productSelectDone: false,
   productSelectError: null,
   productCountLoading: false,
   productCountDone: false,
   productCountError: null,
-  productCategoryLoading: true,
+  productCategoryLoading: false,
   productCategoryDone: false,
   productCategoryError: null,
   category1: null,
@@ -30,6 +36,26 @@ const initial = {
 
 const productReducer = (state = initial, action) => {
   switch (action.type) {
+    case PRODUCT_SEARCH_REQUEST:
+      return {
+        ...state,
+        productSearchLoading: true,
+        productSearchDone: false,
+        productSearchError: null
+      }
+    case PRODUCT_SEARCH_SUCCESS:
+      return {
+        ...state,
+        productSearchLoading: false,
+        productSearchDone: true,
+        products: action.data
+      }
+    case PRODUCT_SEARCH_FAILURE:
+      return {
+        ...state,
+        productSearchLoading: false,
+        productSearchError: true
+      }
     case PRODUCT_SELECT_REQUEST:
       return {
         ...state,
