@@ -11,6 +11,7 @@ const initial = {
   emailCheckLoading: false,
   emailCheckDone: false,
   emailCheckError: null,
+  emailCheckCount: null,
   signUpLoading: false,
   signUpDone: false,
   signUpError: null,
@@ -30,13 +31,15 @@ const userReducer = (state = initial, action) => {
       return {
         ...state,
         emailCheckLoading: false,
-        emailCheckDone: true
+        emailCheckDone: true,
+        emailCheckCount: action.data.data.json[0]
       }
     case EMAIL_CHECK_FAILURE:
       return {
         ...state,
         emailCheckLoading: false,
-        emailCheckError: true
+        emailCheckError: true,
+        emailCheckCount: action.data
       }
     case USER_SIGNUP_REQUEST:
       return {

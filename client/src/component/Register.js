@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
@@ -16,7 +16,14 @@ import { EMAIL_CHECK_REQUEST, USER_SIGNUP_REQUEST } from '../redux/types'
 
 const Register = () => {
   const dispatch = useDispatch()
-  const { emailCheckDone, emailCheckError } = useSelector(state => state.user)
+  const { emailCheckCount } = useSelector(state => state.user)
+
+  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
+  const nameRef = useRef(null)
+  const majorRef = useRef(null)
+  const orgRef = useRef(null)
+  const phoneRef = useRef(null)
 
   const [email, onChangeEmail] = useInput('')
   const [password, onChangePassword] = useInput('')
@@ -24,32 +31,62 @@ const Register = () => {
   const [major, onChangeMajor] = useInput('')
   const [org, onChangeOrg] = useInput('')
   const [phone, onChangePhone] = useInput('')
+  const [isValid, setIsValid] = useState(false)
 
-  const emailCheck = useCallback(() => {
-    dispatch({
+  const emailCheck = useCallback(async () => {
+    await dispatch({
       type: EMAIL_CHECK_REQUEST,
       data: {
-        user_email1: email,
-        user_email2: email
+        user_email1: email.split('@')[0],
+        user_email2: email.split('@')[1]
       }
     })
   }, [dispatch, email])
 
+  const validation = useCallback(() => {
+    if (!emailRef.current.value) {
+      emailRef.current.focus()
+      console.log(emailRef)
+      return false
+    } else if (!passwordRef.current.value) {
+      passwordRef.current.focus()
+      return false
+    } else if (!nameRef.current.value) {
+      nameRef.current.focus()
+      return false
+    } else if (!phoneRef.current.value) {
+      phoneRef.current.focus()
+      return false
+    } else if (!orgRef.current.value) {
+      orgRef.current.focus()
+      return false
+    } else if (!majorRef.current.value) {
+      majorRef.current.focus()
+      return false
+    } else {
+      return true
+    }
+  }, [])
+
   const signUp = useCallback(
     e => {
       e.preventDefault()
-      dispatch({
-        type: USER_SIGNUP_REQUEST,
-        data: {
-          user_email1: email,
-          user_email2: email,
-          user_password: password,
-          user_name: name,
-          user_major: major,
-          user_phone: phone,
-          user_org: org
-        }
-      })
+      if (validation()) {
+        dispatch({
+          type: USER_SIGNUP_REQUEST,
+          data: {
+            user_email1: email.split('@')[0],
+            user_email2: email.split('@')[1],
+            user_password: password,
+            user_name: name,
+            user_major: major,
+            user_phone: phone,
+            user_org: org
+          }
+        })
+      } else {
+        return
+      }
     },
     [dispatch, email, password, name, major, phone, org]
   )
@@ -66,19 +103,14 @@ const Register = () => {
             type="email"
             maxLength={30}
             minLength={4}
-            valid={emailCheckDone && emailCheckDone}
-            invalid={emailCheckError && emailCheckError}
             value={email}
             onChange={onChangeEmail}
+            innerRef={emailRef}
+            valid={emailCheckCount && !emailCheckCount?.dupliEmailCount}
+            invalid={emailCheckCount && !!emailCheckCount?.dupliEmailCount}
           />
-          <FormFeedback
-            valid={emailCheckDone && emailCheckDone}
-            invalid={emailCheckError && emailCheckError}
-          >
-            {emailCheckError
-              ? '사용가능한 이메일입니다.'
-              : '이미 존재하는 이메일입니다.'}
-          </FormFeedback>
+          <FormFeedback valid>사용가능한 이메일입니다.</FormFeedback>
+          <FormFeedback>이미 존재하는 이메일입니다.</FormFeedback>
           <Button
             className="email-check-button"
             color="success"
@@ -101,7 +133,9 @@ const Register = () => {
             maxLength={100}
             onChange={onChangePassword}
             value={password}
+            innerRef={passwordRef}
           />
+          <FormFeedback>비밀번호를 입력해주세요.</FormFeedback>
         </FormGroup>
         <FormGroup>
           <Label for="name">이름</Label>
@@ -114,6 +148,7 @@ const Register = () => {
             maxLength={30}
             onChange={onChangeName}
             value={name}
+            innerRef={nameRef}
           />
         </FormGroup>
         <FormGroup>
@@ -127,6 +162,7 @@ const Register = () => {
             maxLength={100}
             onChange={onChangePhone}
             value={phone}
+            innerRef={phoneRef}
           />
         </FormGroup>
         <FormGroup>
@@ -140,6 +176,7 @@ const Register = () => {
             maxLength={20}
             onChange={onChangeOrg}
             value={org}
+            innerRef={orgRef}
           />
         </FormGroup>
         <FormGroup>
@@ -153,6 +190,7 @@ const Register = () => {
             maxLength={100}
             onChange={onChangeMajor}
             value={major}
+            innerRef={majorRef}
           />
         </FormGroup>
 
