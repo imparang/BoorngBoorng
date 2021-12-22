@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { Form, Input, Nav, Navbar, NavItem } from 'reactstrap'
+import { Nav, Navbar, NavItem } from 'reactstrap'
+import SearchProduct from '../component/SearchProduct'
 
 import '../scss/header.scss'
 
@@ -36,10 +37,7 @@ const Header = () => {
             }}
             className="search-product"
           >
-            <Form style={{ width: '100%', maxWidth: '300px' }}>
-              <i className="bx bx-search"></i>
-              <Input placeholder="상품을 검색해보세요" block="true" />
-            </Form>
+            <SearchProduct />
           </NavItem>
           <NavItem
             style={{
