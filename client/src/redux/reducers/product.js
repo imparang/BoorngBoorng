@@ -4,7 +4,10 @@ import {
   PRODUCT_SELECT_FAILURE,
   PRODUCT_COUNT_REQUEST,
   PRODUCT_COUNT_SUCCESS,
-  PRODUCT_COUNT_FAILURE
+  PRODUCT_COUNT_FAILURE,
+  PRODUCT_CATEGORY_REQUEST,
+  PRODUCT_CATEGORY_SUCCESS,
+  PRODUCT_CATEGORY_FAILURE
 } from '../types'
 
 const initial = {
@@ -14,6 +17,13 @@ const initial = {
   productCountLoading: false,
   productCountDone: false,
   productCountError: null,
+  productCategoryLoading: true,
+  productCategoryDone: false,
+  productCategoryError: null,
+  category1: null,
+  category2: null,
+  category3: null,
+  category4: null,
   products: null,
   totalCount: 0
 }
@@ -59,6 +69,25 @@ const productReducer = (state = initial, action) => {
         ...state,
         productCountLoading: false,
         productCountError: true
+      }
+    case PRODUCT_CATEGORY_REQUEST:
+      return {
+        ...state,
+        productCategoryLoading: true,
+        productCategoryDone: false,
+        productCategoryError: null
+      }
+    case PRODUCT_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        productCategoryLoading: false,
+        productCategoryDone: true
+      }
+    case PRODUCT_CATEGORY_FAILURE:
+      return {
+        ...state,
+        productCategoryLoading: false,
+        productCategoryError: true
       }
     default:
       return state
