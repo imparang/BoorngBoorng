@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
@@ -31,7 +31,6 @@ const Register = () => {
   const [major, onChangeMajor] = useInput('')
   const [org, onChangeOrg] = useInput('')
   const [phone, onChangePhone] = useInput('')
-  const [isValid, setIsValid] = useState(false)
 
   const emailCheck = useCallback(async () => {
     await dispatch({
@@ -88,7 +87,7 @@ const Register = () => {
         return
       }
     },
-    [dispatch, email, password, name, major, phone, org]
+    [dispatch, email, password, name, major, phone, org, validation]
   )
   return (
     <Container style={{ marginBottom: '16px', maxWidth: '400px' }}>
