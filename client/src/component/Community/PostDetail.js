@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap'
 import { useInput } from '../../hooks/useInput'
 

@@ -6,7 +6,7 @@ const UpdateUser = () => {
   return (
     <Container style={{ marginBottom: '16px', maxWidth: '400px' }}>
       <Form className="user-form" onSubmit={e => e.preventDefault()}>
-        <h2>회원가입</h2>
+        <h2>회원정보 수정</h2>
         <FormGroup>
           <Label for="email">이메일</Label>
           <Input

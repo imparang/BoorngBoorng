@@ -126,11 +126,11 @@ const TotalPrice = () => {
 
   useEffect(() => {
     setTotal(cartList.reduce((acc, cur) => acc + cur.amount * cur.l_price, 0))
-  }, [])
+  }, [cartList])
 
   useEffect(() => {
     setCount(cartList.reduce((acc, cur) => acc + cur.amount, 0))
-  }, [])
+  }, [cartList])
 
   return (
     <>
@@ -140,7 +140,9 @@ const TotalPrice = () => {
         </div>
         <div className="cart-price-total">
           <span>총 상품 금액</span>
-          <strong>{total}원</strong>
+          <strong>
+            {total.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}원
+          </strong>
         </div>
       </section>
       <Button color="primary" block={true} onClick={() => navigate('/order')}>

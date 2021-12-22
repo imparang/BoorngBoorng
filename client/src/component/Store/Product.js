@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'reactstrap'
 
@@ -6,7 +6,6 @@ import '../../scss/store/product.scss'
 
 const Product = ({ product }) => {
   const navigate = useNavigate()
-  const [item, setItem] = useState('hell')
 
   return (
     <section className="product">
