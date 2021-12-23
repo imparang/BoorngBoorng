@@ -88,9 +88,16 @@ function App() {
     }
   }, [])
 
+  // 로그아웃 로직
+  const fncRemoveCookie = useCallback(() => {
+    cookie.remove('token_id', { path: '/' })
+    cookie.remove('token_name', { path: '/' })
+    cookie.remove('user_password', { path: '/' })
+  }, [])
+
   // 검증실패 또는 token 정보 없을 경우 로그인 상태 해제 처리
   const fncNotLogin = useCallback(() => {
-    if (document.cookie === '') {
+    if (document.cookie !== '') {
       fncRemoveCookie()
     }
     if (
@@ -100,14 +107,7 @@ function App() {
     ) {
       window.location.href = '/login'
     }
-  }, [])
-
-  // 로그아웃 로직
-  const fncRemoveCookie = useCallback(() => {
-    cookie.remove('token_id', { path: '/' })
-    cookie.remove('token_name', { path: '/' })
-    cookie.remove('user_password', { path: '/' })
-  }, [])
+  }, [fncRemoveCookie])
 
   return (
     <Container>
@@ -126,11 +126,10 @@ function App() {
         />
         <Route path="/store/product/:productId" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart userId={userId} />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/order" element={<Order userId={userId} />} />
         <Route path="/user" element={<Profile />} />
         <Route path="/user/pwd" element={<Pwd />} />
         <Route path="/user/update" element={<UpdateUser />} />
-        <Route path="/naverApi" element={<Naver />} />
       </Routes>
       <Footer />
     </Container>
