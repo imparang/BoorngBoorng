@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Button,
   Container,
@@ -17,6 +17,8 @@ import { EMAIL_CHECK_REQUEST, USER_SIGNUP_REQUEST } from '../redux/types'
 const Register = () => {
   const dispatch = useDispatch()
   const { emailCheckCount } = useSelector(state => state.user)
+
+  const navigate = useNavigate()
 
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
@@ -83,6 +85,7 @@ const Register = () => {
             user_org: org
           }
         })
+        navigate('/')
       } else {
         return
       }
@@ -193,7 +196,6 @@ const Register = () => {
           />
         </FormGroup>
 
-        {/* 알림창 걸어서 회원가입 확인 작업 */}
         <Button color="primary" block={true}>
           회원가입
         </Button>
