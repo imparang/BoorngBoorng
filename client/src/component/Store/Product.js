@@ -1,15 +1,34 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Button } from 'reactstrap'
+import { CART_SAVE_REQUEST } from '../../redux/types'
 
 import '../../scss/store/product.scss'
 
-const Product = ({ product }) => {
-  const navigate = useNavigate()
+const Product = ({ product, cartId, userId }) => {
+  const dispatch = useDispatch()
+  const cartSave = useCallback(() => {
+    if (cartId && userId) {
+      dispatch({
+        type: CART_SAVE_REQUEST,
+        data: {
+          cart_id: cartId,
+          product_id: product.product_id,
+          user_id: userId
+        }
+      })
+    } else {
+      window.location.href = '/login'
+    }
+  }, [])
 
   return (
     <section className="product">
-      <Link to={`/store/product/${product.product_id}`} state={{ product }}>
+      <Link
+        to={`/store/product/${product.product_id}`}
+        state={{ product, userId, cartId }}
+      >
         <img
           className="product-image"
           src={product.image}
@@ -48,12 +67,7 @@ const Product = ({ product }) => {
           </span>
         </div>
       </Link>
-      <Button
-        className="cart-button"
-        outline
-        color="danger"
-        onClick={() => navigate('/order')}
-      >
+      <Button className="cart-button" outline color="danger" onClick={cartSave}>
         <i className="bx bx-cart"></i>
       </Button>
     </section>
