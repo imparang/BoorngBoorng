@@ -6,10 +6,8 @@ import SearchProduct from '../component/SearchProduct'
 import '../scss/header.scss'
 
 const Header = ({ userId, fncNotLogin }) => {
-  const logOut = useCallback(e => {
-    e.preventDefault()
+  const logOut = useCallback(() => {
     fncNotLogin()
-    window.location.href = '/'
   }, [])
   return (
     <header>
@@ -90,9 +88,9 @@ const Header = ({ userId, fncNotLogin }) => {
                   alignItems: 'center'
                 }}
               >
-                <Link to="/" onClick={logOut}>
+                <a href="/" onClick={logOut}>
                   로그아웃
-                </Link>
+                </a>
               </NavItem>
             </>
           ) : (
