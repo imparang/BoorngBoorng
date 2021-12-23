@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Col, Container, Row } from 'reactstrap'
 import CartContainer from './CartContainer'
 import TotalPrice from './TotalPrice'
+import { useDispatch, useSelector } from 'react-redux'
+import { CART_SELECT_REQUEST } from '../../redux/types'
 
 const Cart = () => {
+  const dispatch = useDispatch()
+  const { carts } = useSelector(state => state.cart)
+
+  useEffect(() => {
+    dispatch({
+      type: CART_SELECT_REQUEST,
+      data: {
+        user_id: 'test1234@test.com'
+      }
+    })
+  }, [carts])
   return (
     <Container
       style={{ minHeight: '600px', marginBottom: '16px', position: 'relative' }}
