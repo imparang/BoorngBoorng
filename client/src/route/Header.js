@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useCallback } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Nav, Navbar, NavItem } from 'reactstrap'
 import SearchProduct from '../component/SearchProduct'
 
 import '../scss/header.scss'
 
-const Header = () => {
-  const [isAuth, setIsAuth] = useState(true)
+const Header = ({ userId, fncNotLogin }) => {
+  const logOut = useCallback(e => {
+    e.preventDefault()
+    fncNotLogin()
+    window.location.href = '/'
+  }, [])
   return (
     <header>
       <Navbar
@@ -68,16 +72,29 @@ const Header = () => {
           >
             <NavLink to="/cart">장바구니</NavLink>
           </NavItem>
-          {isAuth ? (
-            <NavItem
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <NavLink to="/user">마이페이지</NavLink>
-            </NavItem>
+          {userId ? (
+            <>
+              <NavItem
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <NavLink to="/user">마이페이지</NavLink>
+              </NavItem>
+              <NavItem
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <Link to="/" onClick={logOut}>
+                  로그아웃
+                </Link>
+              </NavItem>
+            </>
           ) : (
             <>
               <NavItem
