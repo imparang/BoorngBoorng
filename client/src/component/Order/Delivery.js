@@ -14,7 +14,9 @@ import {
 const Delivery = () => {
   return (
     <Card>
-      <CardHeader>배송지</CardHeader>
+      <CardHeader style={{ fontSize: '16px', fontWeight: '700' }}>
+        배송지
+      </CardHeader>
       <CardBody>
         <Form>
           <FormGroup row>

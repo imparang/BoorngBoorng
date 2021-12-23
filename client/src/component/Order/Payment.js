@@ -15,7 +15,9 @@ import {
 const Payment = () => {
   return (
     <Card>
-      <CardHeader>결제</CardHeader>
+      <CardHeader style={{ fontSize: '16px', fontWeight: '700' }}>
+        결제
+      </CardHeader>
       <CardBody>
         <Form>
           <FormGroup row>
