@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Button, FormGroup, Input, Label } from 'reactstrap'
 
 import '../../scss/store/detail.scss'
@@ -7,7 +7,6 @@ import '../../scss/store/detail.scss'
 const ProductDetail = props => {
   const location = useLocation()
   const { product } = location.state
-  const navigate = useNavigate()
   const [count, setCount] = useState(1)
   const onChange = e => {
     if (e.target.value <= product.product_count) setCount(e.target.value)
@@ -22,8 +21,8 @@ const ProductDetail = props => {
             <h2
               className="title"
               dangerouslySetInnerHTML={{
-                __html: product.maker
-                  ? `[${product.maker}] ${product.title}`
+                __html: product.brand
+                  ? `[${product.brand}] ${product.title}`
                   : product.title
               }}
             ></h2>
@@ -71,8 +70,14 @@ const ProductDetail = props => {
                 onChange={onChange}
                 min={1}
               />
-              <Button color="primary" onClick={() => navigate('/order')}>
-                구매하기
+              <Button color="primary">
+                <Link
+                  to="/order"
+                  state={{ product }}
+                  style={{ margin: 0, color: '#fff' }}
+                >
+                  구매하기
+                </Link>
               </Button>
               {product.product_count ? (
                 <p className="soldout">
@@ -86,10 +91,10 @@ const ProductDetail = props => {
               )}
             </FormGroup>
 
-            {product.maker && (
+            {product.brand && (
               <>
                 <h5 className="description">제조사</h5>
-                <p className="content">{product.maker}</p>
+                <p className="content">{product.brand}</p>
               </>
             )}
 

@@ -18,8 +18,8 @@ const Product = ({ product }) => {
         <h4
           className="product-title"
           dangerouslySetInnerHTML={{
-            __html: product.maker
-              ? `[${product.maker}] ${product.title}`
+            __html: product.brand
+              ? `[${product.brand}] ${product.title}`
               : product.title
           }}
         ></h4>

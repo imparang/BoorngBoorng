@@ -23,7 +23,7 @@ const PostContainer = () => {
         start
       }
     })
-  }, [dispatch, posts, start])
+  }, [start])
 
   const PostList = useMemo(
     () =>

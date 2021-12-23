@@ -1,28 +1,31 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, Form, Input } from 'reactstrap'
 
 import '../../scss/board/search-form.scss'
 import { useInput } from '../../hooks/useInput'
-import { BOARD_SEARCH_REQUEST } from '../../redux/types'
+import { BOARD_SEARCH_REQUEST, BOARD_SELECT_REQUEST } from '../../redux/types'
 
 const SearchPost = () => {
   const dispatch = useDispatch()
+
   const [query, onChangeQuery] = useInput('')
 
   const onSubmit = useCallback(
     e => {
       e.preventDefault()
-      if (!query) return
       dispatch({
-        type: BOARD_SEARCH_REQUEST,
+        type: BOARD_SELECT_REQUEST,
         data: {
+          length: 5,
+          start: 0,
           content: query
         }
       })
     },
-    [query, dispatch]
+    [query]
   )
+
   return (
     <div className="search-post">
       <Form className="search-post-form" onSubmit={onSubmit}>
