@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import {
   Card,
   CardBody,
@@ -12,13 +12,52 @@ import {
 } from 'reactstrap'
 
 const Delivery = () => {
+  const nameRef = useRef(null)
+  const phoneFirstRef = useRef(null)
+  const phoneMiddleRef = useRef(null)
+  const phoneLastRef = useRef(null)
+  const addressRef = useRef(null)
+  const detailAddressRef = useRef(null)
+
+  const validation = useCallback(() => {
+    if (!nameRef.current.value) {
+      nameRef.current.focus()
+      return false
+    } else if (!phoneFirstRef.current.value) {
+      phoneFirstRef.current.focus()
+      return false
+    } else if (!phoneMiddleRef.current.value) {
+      phoneMiddleRef.current.focus()
+      return false
+    } else if (!phoneLastRef.current.value) {
+      phoneLastRef.current.focus()
+      return false
+    } else if (!addressRef.current.value) {
+      addressRef.current.focus()
+      return false
+    } else if (!detailAddressRef.current.value) {
+      detailAddressRef.current.focus()
+      return false
+    } else {
+      return true
+    }
+  }, [])
+
+  const onSubmit = useCallback(e => {
+    e.preventDefault()
+    if (validation()) {
+    } else {
+      return
+    }
+  }, [])
+
   return (
     <Card>
       <CardHeader style={{ fontSize: '16px', fontWeight: '700' }}>
         배송지
       </CardHeader>
       <CardBody>
-        <Form>
+        <Form onSubmit={onSubmit}>
           <FormGroup row>
             <Label for="order-number" sm={2}>
               주문번호
@@ -43,6 +82,7 @@ const Delivery = () => {
                 placeholder="수취인을 입력해주세요"
                 type="text"
                 valid
+                innerRef={nameRef}
               />
             </Col>
           </FormGroup>
@@ -68,6 +108,7 @@ const Delivery = () => {
                 maxLength={3}
                 invalid
                 style={{ flex: 1, marginRight: '8px' }}
+                innerRef={phoneFirstRef}
               />
               ㅡ
               <Input
@@ -78,6 +119,7 @@ const Delivery = () => {
                 maxLength={4}
                 invalid
                 style={{ flex: 1, margin: '0 8px' }}
+                innerRef={phoneMiddleRef}
               />
               ㅡ
               <Input
@@ -88,8 +130,9 @@ const Delivery = () => {
                 maxLength={4}
                 invalid
                 style={{ flex: 1, margin: '0 8px' }}
+                innerRef={phoneLastRef}
               />
-              <FormFeedback invalid>핸드폰 번호를 입력하세요.</FormFeedback>
+              <FormFeedback>핸드폰 번호를 입력하세요.</FormFeedback>
             </Col>
           </FormGroup>
           <FormGroup row>
@@ -102,15 +145,17 @@ const Delivery = () => {
                 name="address"
                 placeholder="주소를 입력해주세요"
                 type="address"
-                invalid
+                invalid={!addressRef.current.value}
+                innerRef={addressRef}
               />
-              <FormFeedback invalid style={{ marginBottom: '10px' }}>
+              <FormFeedback style={{ marginBottom: '10px' }}>
                 주소를 입력하세요.
               </FormFeedback>
               <Input
                 name="address-detail"
                 placeholder="상세 주소를 입력해주세요"
                 type="address"
+                innerRef={detailAddressRef}
               />
             </Col>
           </FormGroup>
