@@ -17,7 +17,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 import 'sweetalert2/src/sweetalert2.scss'
 
-const CardInfo = ({ cartId, data, product }) => {
+const CardInfo = ({ cartId, data, product, userId }) => {
   const dispatch = useDispatch()
   const { totalPrice } = useSelector(state => state.cart)
 
@@ -77,7 +77,7 @@ const CardInfo = ({ cartId, data, product }) => {
             card_number4: cardFourthRef.current.value,
             card_month: cardMonthRef.current.value,
             card_year: cardYearRef.current.value,
-            user_id: 'test1234@test.com',
+            user_id: userId,
             total_price: totalPrice,
             complete_yn: 'Y'
           }
@@ -120,7 +120,7 @@ const CardInfo = ({ cartId, data, product }) => {
           type: ORDER_COMPLETED_REQUEST,
           data: {
             cart_id: cartId,
-            user_id: 'test1234@test.com',
+            user_id: userId,
             complete_yn: 'Y',
             product_id: product.product_id
           }
@@ -130,6 +130,7 @@ const CardInfo = ({ cartId, data, product }) => {
         if (result.isConfirmed) {
           Swal.fire('주문이 완료되었습니다.', 'success')
         }
+        window.location.href = '/'
       })
   }, [])
 
