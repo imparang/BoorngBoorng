@@ -7,7 +7,10 @@ import {
   CART_ID_FAILURE,
   CART_TOTALPRICE_REQUEST,
   CART_TOTALPRICE_SUCCESS,
-  CART_TOTALPRICE_FAILURE
+  CART_TOTALPRICE_FAILURE,
+  CART_SAVE_REQUEST,
+  CART_SAVE_SUCCESS,
+  CART_SAVE_FAILURE
 } from '../types'
 
 const initial = {
@@ -20,6 +23,9 @@ const initial = {
   cartTotalPriceLoading: false,
   cartTotalPriceDone: false,
   cartTotalPriceError: null,
+  cartSaveLoading: false,
+  cartSaveDone: false,
+  cartSaveError: null,
   carts: null,
   cartId: null,
   totalPrice: 0
@@ -86,6 +92,25 @@ const cartReducer = (state = initial, action) => {
         ...state,
         cartTotalPriceLoading: false,
         cartTotalPriceError: true
+      }
+    case CART_SAVE_REQUEST:
+      return {
+        ...state,
+        cartSaveLoading: true,
+        cartSaveDone: false,
+        cartSaveError: null
+      }
+    case CART_SAVE_SUCCESS:
+      return {
+        ...state,
+        cartSaveLoading: false,
+        cartSaveDone: true
+      }
+    case CART_SAVE_FAILURE:
+      return {
+        ...state,
+        cartSaveLoading: false,
+        cartSaveError: true
       }
     default:
       return state

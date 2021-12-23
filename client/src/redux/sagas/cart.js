@@ -7,7 +7,10 @@ import {
   CART_ID_FAILURE,
   CART_TOTALPRICE_REQUEST,
   CART_TOTALPRICE_SUCCESS,
-  CART_TOTALPRICE_FAILURE
+  CART_TOTALPRICE_FAILURE,
+  CART_SAVE_REQUEST,
+  CART_SAVE_SUCCESS,
+  CART_SAVE_FAILURE
 } from '../types'
 import { all, fork, call, put, takeLatest } from 'redux-saga/effects'
 import getAxiosApi from '../../api'
@@ -84,10 +87,35 @@ function* watchCartTotalPrice() {
   yield takeLatest(CART_TOTALPRICE_REQUEST, cartTotalPrice)
 }
 
+// cart save
+function cartSaveApi(data) {
+  return getAxiosApi('/cart?type=save', data)
+}
+
+function* cartSave(action) {
+  try {
+    const result = yield call(cartSaveApi, action.data)
+    yield put({
+      type: CART_SAVE_SUCCESS,
+      data: result
+    })
+  } catch (error) {
+    yield put({
+      type: CART_SAVE_FAILURE,
+      data: error
+    })
+  }
+}
+
+function* watchCartSave() {
+  yield takeLatest(CART_SAVE_REQUEST, cartSave)
+}
+
 export default function* cartSaga() {
   yield all([
     fork(watchCartSelect),
     fork(watchCartId),
-    fork(watchCartTotalPrice)
+    fork(watchCartTotalPrice),
+    fork(watchCartSave)
   ])
 }
