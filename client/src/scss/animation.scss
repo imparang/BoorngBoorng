@@ -39,6 +39,7 @@ $basepx: 16px;
     text-align: center;
     animation: carMove 300ms infinite,
       carDrive 5s 1s cubic-bezier(0.88, 0.08, 0.16, 1.1) infinite;
+    user-select: none;
   }
 
   .animation-car-wrapper {
