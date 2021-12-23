@@ -4,7 +4,10 @@ import {
   CART_SELECT_FAILURE,
   CART_ID_REQUEST,
   CART_ID_SUCCESS,
-  CART_ID_FAILURE
+  CART_ID_FAILURE,
+  CART_TOTALPRICE_REQUEST,
+  CART_TOTALPRICE_SUCCESS,
+  CART_TOTALPRICE_FAILURE
 } from '../types'
 
 const initial = {
@@ -14,8 +17,12 @@ const initial = {
   cartIdLoading: false,
   cartIdDone: false,
   cartIdError: null,
+  cartTotalPriceLoading: false,
+  cartTotalPriceDone: false,
+  cartTotalPriceError: null,
   carts: null,
-  cartId: null
+  cartId: null,
+  totalPrice: 0
 }
 
 const cartReducer = (state = initial, action) => {
@@ -59,6 +66,26 @@ const cartReducer = (state = initial, action) => {
         ...state,
         cartIdLoading: false,
         cartIdError: true
+      }
+    case CART_TOTALPRICE_REQUEST:
+      return {
+        ...state,
+        cartTotalPriceLoading: true,
+        cartTotalPriceDone: false,
+        cartTotalPriceError: null
+      }
+    case CART_TOTALPRICE_SUCCESS:
+      return {
+        ...state,
+        cartTotalPriceLoading: false,
+        cartTotalPriceDone: true,
+        totalPrice: action.data.data.json[0].total_price
+      }
+    case CART_TOTALPRICE_FAILURE:
+      return {
+        ...state,
+        cartTotalPriceLoading: false,
+        cartTotalPriceError: true
       }
     default:
       return state
