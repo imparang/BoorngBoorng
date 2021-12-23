@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, FormGroup, Input } from 'reactstrap'
 
 const CartItem = ({ item }) => {
-  const [amounts, setAmounts] = useState(Array(item.amount).fill(0))
   const [totalPrice, setTotalPrice] = useState(0)
   const [amount, setAmount] = useState(item.amount)
 
@@ -33,11 +32,13 @@ const CartItem = ({ item }) => {
           type="select"
           onChange={handleOnChange}
         >
-          {amounts.map((amount, i) => (
-            <option key={item.amount - i} value={item.amount - i}>
-              {item.amount - i}
-            </option>
-          ))}
+          {Array(item.amount)
+            .fill(0)
+            .map((amount, i) => (
+              <option key={item.amount - i} value={item.amount - i}>
+                {item.amount - i}
+              </option>
+            ))}
         </Input>
         <span>
           {item.l_price
@@ -57,7 +58,7 @@ const CartItem = ({ item }) => {
         <Button color="primary">
           <Link
             to="/order"
-            state={{ product: item }}
+            state={{ product: item, amount }}
             style={{ margin: 0, color: '#fff', fontSize: '14px' }}
           >
             상품구매
