@@ -9,7 +9,7 @@ import PaginationContainer from '../PaginationContainer'
 import CategoryFilter from './CategoryFilter'
 import Product from './Product'
 
-const Store = () => {
+const Store = ({ cartId, userId }) => {
   const dispatch = useDispatch()
   const { products, totalCount } = useSelector(state => state.product)
   const [start, setStart] = useState(0)
@@ -45,7 +45,12 @@ const Store = () => {
       <div className="products">
         {products?.length &&
           products?.map(product => (
-            <Product key={product.product_id} product={product} />
+            <Product
+              key={product.product_id}
+              product={product}
+              cartId={cartId}
+              userId={userId}
+            />
           ))}
       </div>
       <PaginationContainer

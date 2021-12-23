@@ -6,8 +6,7 @@ import PostContainer from './PostContainer'
 import SearchPost from './SearchPost'
 import TagBox from './TagBox'
 
-const Board = props => {
-  console.log('Board')
+const Board = ({ userId }) => {
   return (
     <Container
       style={{ minHeight: '600px', marginBottom: '16px', position: 'relative' }}
@@ -20,7 +19,7 @@ const Board = props => {
         <Col md="8">
           <SearchPost />
           <FilterTagBox />
-          <PostContainer />
+          <PostContainer userId={userId} />
         </Col>
         <Col md="2">
           <TagBox />

@@ -2,12 +2,12 @@ import React from 'react'
 import PaginationContainer from '../PaginationContainer'
 import CartList from './CartList'
 
-const CartContainer = ({ carts }) => {
+const CartContainer = ({ carts, userId }) => {
   return (
     <section>
       {carts && (
         <>
-          <CartList cartList={carts} />
+          <CartList cartList={carts} userId={userId} />
           <PaginationContainer
             link="cart"
             size="sm"

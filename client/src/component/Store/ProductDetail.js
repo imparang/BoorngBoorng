@@ -4,7 +4,7 @@ import { Button, FormGroup, Input, Label } from 'reactstrap'
 
 import '../../scss/store/detail.scss'
 
-const ProductDetail = props => {
+const ProductDetail = ({ cartId, userId }) => {
   const location = useLocation()
   const { product } = location.state
   const [count, setCount] = useState(1)
@@ -69,15 +69,22 @@ const ProductDetail = props => {
                 value={count}
                 onChange={onChange}
                 min={1}
+                max={product.product_count}
               />
               <Button color="primary">
-                <Link
-                  to="/order"
-                  state={{ product }}
-                  style={{ margin: 0, color: '#fff' }}
-                >
-                  구매하기
-                </Link>
+                {userId && cartId ? (
+                  <Link
+                    to="/order"
+                    state={{ product, cartId, userId }}
+                    style={{ margin: 0, color: '#fff' }}
+                  >
+                    구매하기
+                  </Link>
+                ) : (
+                  <a href="/login" style={{ margin: 0, color: '#fff' }}>
+                    구매하기
+                  </a>
+                )}
               </Button>
               {product.product_count ? (
                 <p className="soldout">

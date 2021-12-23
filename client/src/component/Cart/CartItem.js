@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, FormGroup, Input } from 'reactstrap'
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, userId }) => {
   const [totalPrice, setTotalPrice] = useState(0)
   const [amount, setAmount] = useState(item.amount)
 

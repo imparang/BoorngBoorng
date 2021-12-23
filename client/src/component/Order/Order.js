@@ -14,7 +14,7 @@ const Order = () => {
     >
       <h2 className="visually-hidden">상품 구매</h2>
       <ProductList amount={amount} product={product} />
-      <Payment />
+      <Payment product={product} />
     </Container>
   )
 }
