@@ -40,7 +40,7 @@ const Register = () => {
         user_email2: email.split('@')[1]
       }
     })
-  }, [dispatch, email])
+  }, [email])
 
   const validation = useCallback(() => {
     if (!emailRef.current.value) {
@@ -87,7 +87,7 @@ const Register = () => {
         return
       }
     },
-    [dispatch, email, password, name, major, phone, org, validation]
+    [email, password, name, major, phone, org, validation]
   )
   return (
     <Container style={{ marginBottom: '16px', maxWidth: '400px' }}>
