@@ -1,0 +1,104 @@
+.filter-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+
+  &-wrapper {
+    width: 100%;
+    height: 40px;
+    flex: 9;
+    margin-right: 20px;
+    padding: 0 16px 0 40px;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    appearance: none;
+
+    .bx-hash {
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #505050;
+      pointer-events: none;
+    }
+
+    .filterbox-placeholder {
+      display: flex;
+      align-items: center;
+      height: inherit;
+      font-size: 16px;
+      color: #6c757d;
+      user-select: none;
+    }
+  }
+
+  &-list {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    gap: 12px;
+
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 24px;
+
+      button {
+        position: relative;
+        display: inline-block;
+        padding: 0 8px;
+        line-height: 24px;
+        border-radius: 0.25rem;
+        text-align: center;
+        background-color: #e4e4e4;
+        transition: background-color 200ms ease-in-out;
+
+        .bx-x {
+          flex: none;
+          padding-left: 6px;
+          margin-top: -3px;
+          font-size: 16px;
+          vertical-align: middle;
+        }
+
+        &:hover {
+          background-color: #d4d4d4;
+        }
+      }
+    }
+  }
+
+  &-button {
+    display: inline-block;
+    flex: 1;
+    width: 100%;
+    height: 40px;
+    white-space: nowrap;
+    padding: 6px 13px;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #fff;
+    transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
+
+    i {
+      flex: 1;
+      margin-right: 4px;
+      margin-top: -2px;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      color: #0d6efd;
+      background-color: #ced4da;
+    }
+  }
+}

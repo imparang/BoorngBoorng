@@ -1,0 +1,5 @@
+@import './modules/form';
+
+.search-product {
+  @extend %form-base;
+}

@@ -1,0 +1,21 @@
+@import '../modules/form';
+
+.search-post {
+  @extend %form-base;
+  margin-bottom: 14px;
+
+  &-form {
+    display: flex;
+  }
+
+  &-input {
+    flex: 9;
+    margin-right: 20px;
+  }
+
+  &-button {
+    display: block;
+    height: 40px;
+    flex: 1;
+  }
+}

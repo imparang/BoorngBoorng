@@ -1,0 +1,46 @@
+.add-board-form {
+  max-width: 600px;
+  margin: 0 auto;
+
+  h2 {
+    margin-bottom: 40px;
+  }
+
+  textarea {
+    height: 200px;
+  }
+
+  .insert-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    div.mb-3 {
+      flex: 1;
+      margin: 0 !important;
+    }
+
+    label {
+      margin-bottom: 0;
+    }
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+
+    div.mb-3 {
+      flex: 1;
+      margin: 0 20px 0 0 !important;
+    }
+
+    button {
+      padding: 6px 18px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+    }
+  }
+}
