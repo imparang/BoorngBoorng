@@ -1,10 +1,10 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import { Col, Container, Row } from 'reactstrap'
+import { Container } from 'reactstrap'
 import Payment from './Payment'
 import ProductList from './ProductList'
 
-const Order = () => {
+const Order = ({ userId }) => {
   const location = useLocation()
   const { product, amount } = location.state
 
@@ -14,7 +14,7 @@ const Order = () => {
     >
       <h2 className="visually-hidden">상품 구매</h2>
       <ProductList amount={amount} product={product} />
-      <Payment product={product} />
+      <Payment product={product} userId={userId} />
     </Container>
   )
 }
