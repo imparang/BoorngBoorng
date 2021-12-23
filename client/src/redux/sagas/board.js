@@ -4,7 +4,10 @@ import {
   BOARD_SEARCH_FAILURE,
   BOARD_SELECT_REQUEST,
   BOARD_SELECT_SUCCESS,
-  BOARD_SELECT_FAILURE
+  BOARD_SELECT_FAILURE,
+  BOARD_ADD_REQUEST,
+  BOARD_ADD_SUCCESS,
+  BOARD_ADD_FAILURE
 } from '../types'
 import { all, fork, put, call, takeLatest } from 'redux-saga/effects'
 import getAxiosApi from '../../api'
@@ -57,6 +60,34 @@ function* watchBoardSelect() {
   yield takeLatest(BOARD_SELECT_REQUEST, boardSelect)
 }
 
+// board insert
+function boardAddApi(data) {
+  return getAxiosApi('/Board?type=save', data)
+}
+
+function* boardAdd(action) {
+  try {
+    const result = yield call(boardAddApi, action.data)
+    yield put({
+      type: BOARD_ADD_SUCCESS,
+      data: result
+    })
+  } catch (error) {
+    yield put({
+      type: BOARD_ADD_FAILURE,
+      data: error
+    })
+  }
+}
+
+function* watchBoardAdd() {
+  yield takeLatest(BOARD_ADD_REQUEST, boardAdd)
+}
+
 export default function* boardSaga() {
-  yield all([fork(watchBoardSearch), fork(watchBoardSelect)])
+  yield all([
+    fork(watchBoardSearch),
+    fork(watchBoardSelect),
+    fork(watchBoardAdd)
+  ])
 }
