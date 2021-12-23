@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, FormGroup, Input } from 'reactstrap'
 
 const CartItem = ({ item }) => {
-  const [amount, setAmount] = useState([])
+  const [amounts, setAmounts] = useState(Array(item.amount).fill(0))
   const [totalPrice, setTotalPrice] = useState(0)
-  useEffect(() => {
-    setAmount([item.amount])
-  }, [item.amount])
+  const [amount, setAmount] = useState(item.amount)
+
+  const handleOnChange = useCallback(e => {
+    const value = e.target.value
+    setAmount(Number(value))
+  }, [])
 
   useEffect(() => {
-    setTotalPrice(item.l_price * item.amount)
-  }, [item.amount, item.l_price])
+    setTotalPrice(item.l_price * amount)
+  }, [amount, item.l_price])
 
   return (
     <article className="cart-item">
@@ -23,9 +27,16 @@ const CartItem = ({ item }) => {
         ></h4>
       </div>
       <div className="cart-item-cost">
-        <Input className="cart-item-cost-amount" name="select" type="select">
-          {amount.map(amount => (
-            <option key={amount}>{amount}</option>
+        <Input
+          className="cart-item-cost-amount"
+          name="select"
+          type="select"
+          onChange={handleOnChange}
+        >
+          {amounts.map((amount, i) => (
+            <option key={item.amount - i} value={item.amount - i}>
+              {item.amount - i}
+            </option>
           ))}
         </Input>
         <span>
@@ -43,7 +54,15 @@ const CartItem = ({ item }) => {
           원
         </strong>
 
-        <Button color="primary">구매</Button>
+        <Button color="primary">
+          <Link
+            to="/order"
+            state={{ product: item }}
+            style={{ margin: 0, color: '#fff', fontSize: '14px' }}
+          >
+            상품구매
+          </Link>
+        </Button>
       </div>
       <div className="remove-cart">
         <i className="bx bx-x"></i>
