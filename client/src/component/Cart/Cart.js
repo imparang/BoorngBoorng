@@ -3,11 +3,11 @@ import { Col, Container, Row } from 'reactstrap'
 import CartContainer from './CartContainer'
 import TotalPrice from './TotalPrice'
 import { useDispatch, useSelector } from 'react-redux'
-import { CART_SELECT_REQUEST } from '../../redux/types'
+import { CART_ID_REQUEST, CART_SELECT_REQUEST } from '../../redux/types'
 
 const Cart = () => {
   const dispatch = useDispatch()
-  const { carts } = useSelector(state => state.cart)
+  const { carts, cartId } = useSelector(state => state.cart)
 
   useEffect(() => {
     dispatch({
@@ -16,7 +16,14 @@ const Cart = () => {
         user_id: 'test1234@test.com'
       }
     })
-  }, [carts])
+    dispatch({
+      type: CART_ID_REQUEST,
+      data: {
+        user_id: 'test1234@test.com'
+      }
+    })
+  }, [])
+
   return (
     <Container
       style={{ minHeight: '600px', marginBottom: '16px', position: 'relative' }}
@@ -24,10 +31,10 @@ const Cart = () => {
       <h2 className="visually-hidden">장바구니</h2>
       <Row>
         <Col md="8">
-          <CartContainer />
+          <CartContainer carts={carts} />
         </Col>
         <Col md="4">
-          <TotalPrice />
+          <TotalPrice cartId={cartId} length={carts.length} />
         </Col>
       </Row>
     </Container>
