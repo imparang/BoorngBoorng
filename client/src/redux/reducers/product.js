@@ -48,7 +48,7 @@ const productReducer = (state = initial, action) => {
         ...state,
         productSearchLoading: false,
         productSearchDone: true,
-        products: action.data
+        products: action.data.data.json
       }
     case PRODUCT_SEARCH_FAILURE:
       return {
@@ -68,7 +68,7 @@ const productReducer = (state = initial, action) => {
         ...state,
         productSelectLoading: false,
         productSelectDone: true,
-        products: action.data
+        products: action.data.data.json
       }
     case PRODUCT_SELECT_FAILURE:
       return {
@@ -88,7 +88,7 @@ const productReducer = (state = initial, action) => {
         ...state,
         productCountLoading: false,
         productCountDone: true,
-        totalCount: action.data
+        totalCount: action.data.data.json[0]
       }
     case PRODUCT_COUNT_FAILURE:
       return {
