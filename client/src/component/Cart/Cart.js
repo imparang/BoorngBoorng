@@ -5,19 +5,13 @@ import TotalPrice from './TotalPrice'
 import { useDispatch, useSelector } from 'react-redux'
 import { CART_ID_REQUEST, CART_SELECT_REQUEST } from '../../redux/types'
 
-const Cart = () => {
+const Cart = ({ userId }) => {
   const dispatch = useDispatch()
   const { carts, cartId } = useSelector(state => state.cart)
 
   useEffect(() => {
     dispatch({
       type: CART_SELECT_REQUEST,
-      data: {
-        user_id: 'test1234@test.com'
-      }
-    })
-    dispatch({
-      type: CART_ID_REQUEST,
       data: {
         user_id: 'test1234@test.com'
       }
@@ -31,7 +25,7 @@ const Cart = () => {
       <h2 className="visually-hidden">장바구니</h2>
       <Row>
         <Col md="8">
-          <CartContainer carts={carts} />
+          <CartContainer carts={carts} userId={userId} />
         </Col>
         <Col md="4">
           <TotalPrice cartId={cartId} length={carts && carts.length} />
