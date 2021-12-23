@@ -1,9 +1,19 @@
-import { ORDER_REQUEST, ORDER_SUCCESS, ORDER_FAILURE } from '../types'
+import {
+  ORDER_REQUEST,
+  ORDER_SUCCESS,
+  ORDER_FAILURE,
+  ORDER_COMPLETED_REQUEST,
+  ORDER_COMPLETED_SUCCESS,
+  ORDER_COMPLETED_FAILURE
+} from '../types'
 
 const initial = {
   orderLoading: false,
   orderDone: false,
-  orderError: null
+  orderError: null,
+  orderCompletedLoading: false,
+  orderCompletedDone: false,
+  orderCompletedError: null
 }
 
 const orderReducer = (state = initial, action) => {
@@ -26,6 +36,25 @@ const orderReducer = (state = initial, action) => {
         ...state,
         orderLoading: false,
         orderError: true
+      }
+    case ORDER_COMPLETED_REQUEST:
+      return {
+        ...state,
+        orderCompletedLoading: true,
+        orderCompletedDone: false,
+        orderCompletedError: null
+      }
+    case ORDER_COMPLETED_SUCCESS:
+      return {
+        ...state,
+        orderCompletedLoading: false,
+        orderCompletedDone: true
+      }
+    case ORDER_COMPLETED_FAILURE:
+      return {
+        ...state,
+        orderCompletedLoading: false,
+        orderCompletedError: true
       }
     default:
       return state
