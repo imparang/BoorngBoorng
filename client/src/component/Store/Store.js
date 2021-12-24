@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container } from 'reactstrap'
+import { Button, Container } from 'reactstrap'
 import {
   PRODUCT_COUNT_REQUEST,
   PRODUCT_SELECT_REQUEST
@@ -15,15 +15,19 @@ const Store = ({ cartId, userId }) => {
   const [start, setStart] = useState(0)
 
   useEffect(() => {
+    fetchProducts()
+  }, [start])
+
+  const fetchProducts = useCallback(() => {
     dispatch({
       type: PRODUCT_SELECT_REQUEST,
       data: {
         user_id: 'test1234@test.com',
         length: 9,
-        start
+        start: 0
       }
     })
-  }, [start])
+  }, [])
 
   useEffect(() => {
     dispatch({
@@ -38,10 +42,19 @@ const Store = ({ cartId, userId }) => {
     <Container
       style={{ minHeight: '600px', marginBottom: '16px', padding: '40px' }}
     >
-      <div className="product-total-count">
-        전체 제품의 수 : {totalCount.total_count}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}
+      >
+        <div className="product-total-count">
+          전체 제품의 수 : {totalCount.total_count}
+        </div>
+        <Button onClick={fetchProducts}>ALL</Button>
       </div>
-      <CategoryFilter />
+
+      <CategoryFilter userId={userId} />
       <div className="products">
         {products?.length &&
           products?.map(product => (

@@ -14,7 +14,7 @@ const UpdateBoard = () => {
 
   return (
     <Container style={{ margin: '20px 0 ' }}>
-      <Form className="add-board-form">
+      <Form className="add-board-form" onSubmit={e => e.preventDefault()}>
         <h2>게시글 수정</h2>
         <FormGroup>
           <Label for="title">Title</Label>
@@ -72,7 +72,7 @@ const UpdateBoard = () => {
           <Button color="primary" onClick={() => navigate('/board')}>
             수정
           </Button>
-          <Button>취소</Button>
+          <Button onClick={() => navigate('/board')}>취소</Button>
         </FormGroup>
       </Form>
     </Container>

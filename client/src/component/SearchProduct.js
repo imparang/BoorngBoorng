@@ -3,9 +3,11 @@ import { Form, Input } from 'reactstrap'
 import { useInput } from '../hooks/useInput'
 import { useDispatch } from 'react-redux'
 import { PRODUCT_SELECT_REQUEST } from '../redux/types'
+import { useNavigate } from 'react-router-dom'
 
 const SearchProduct = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [query, onChangeQuery] = useInput('')
 
   const onSubmit = useCallback(
@@ -20,6 +22,7 @@ const SearchProduct = () => {
           title: query
         }
       })
+      navigate('/store')
     },
     [query]
   )

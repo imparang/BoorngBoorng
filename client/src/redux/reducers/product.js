@@ -103,7 +103,35 @@ const productReducer = (state = initial, action) => {
         productCategoryDone: false,
         productCategoryError: null
       }
+
     case PRODUCT_CATEGORY_SUCCESS:
+      if (!state.category1 || action.category === 'category1') {
+        return {
+          ...state,
+          category1: action.data.data.json,
+          category2: null,
+          category3: null,
+          category4: null
+        }
+      } else if (!state.category2 || action.category === 'category2') {
+        return {
+          ...state,
+          category2: action.data.data.json,
+          category3: null,
+          category4: null
+        }
+      } else if (!state.category3 || action.category === 'category3') {
+        return {
+          ...state,
+          category3: action.data.data.json,
+          category4: null
+        }
+      } else if (!state.category4 || action.category === 'category4') {
+        return {
+          ...state,
+          category4: action.data.data.json
+        }
+      }
       return {
         ...state,
         productCategoryLoading: false,
