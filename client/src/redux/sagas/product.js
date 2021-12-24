@@ -97,7 +97,8 @@ function* productCategory(action) {
     const result = yield call(productCategoryApi, action.data)
     yield put({
       type: PRODUCT_CATEGORY_SUCCESS,
-      data: result
+      data: result,
+      category: action.category
     })
   } catch (error) {
     yield put({

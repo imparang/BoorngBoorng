@@ -84,14 +84,24 @@ const PostDetail = () => {
               onChange={onChangePw}
             />
           </FormGroup>
-          <Link to="/board/update" state={{ post }}>
-            <Button
-              color="primary"
-              disabled={post.write_password && pw !== post.write_password}
+
+          <Button
+            color="primary"
+            disabled={post.write_password && pw !== post.write_password}
+          >
+            <Link
+              to="/board/update"
+              state={{ post }}
+              style={{
+                margin: 0,
+                color: '#fff',
+                fontSize: '16px',
+                fontWeight: '700'
+              }}
             >
               수정하기
-            </Button>
-          </Link>
+            </Link>
+          </Button>
           <Button>뒤로가기</Button>
         </FormGroup>
       </Form>
