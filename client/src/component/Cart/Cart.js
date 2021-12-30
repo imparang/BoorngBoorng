@@ -28,7 +28,7 @@ const Cart = ({ userId }) => {
           <CartContainer carts={carts} userId={userId} />
         </Col>
         <Col md="4">
-          <TotalPrice cartId={cartId} length={carts && carts.length} />
+          <TotalPrice cartId={cartId} length={carts?.length} />
         </Col>
       </Row>
     </Container>
