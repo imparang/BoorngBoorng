@@ -35,7 +35,7 @@ const PostContainer = ({ userId }) => {
     if (userId) {
       navigate('/board/insert')
     } else {
-      window.location.href = '/login'
+      navigate('/login')
     }
   }, [])
   return (

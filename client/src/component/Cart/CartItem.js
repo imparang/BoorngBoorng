@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, FormGroup, Input } from 'reactstrap'
 
@@ -14,6 +14,10 @@ const CartItem = ({ item, userId }) => {
   useEffect(() => {
     setTotalPrice(item.l_price * amount)
   }, [amount, item.l_price])
+
+  const regx = useMemo(value => {
+    return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+  }, [])
 
   return (
     <article className="cart-item">
@@ -32,28 +36,16 @@ const CartItem = ({ item, userId }) => {
           type="select"
           onChange={handleOnChange}
         >
-          {Array(item.amount)
-            .fill(0)
-            .map((amount, i) => (
-              <option key={item.amount - i} value={item.amount - i}>
-                {item.amount - i}
-              </option>
-            ))}
+          {Array.from(item.amount).map((amount, i) => (
+            <option key={item.amount - i} value={item.amount - i}>
+              {item.amount - i}
+            </option>
+          ))}
         </Input>
-        <span>
-          {item.l_price
-            .toString()
-            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}
-          원
-        </span>
+        <span>{regx(item.l_price)}원</span>
       </div>
       <div className="cart-item-order">
-        <strong className="cart-item-total-price">
-          {totalPrice
-            .toString()
-            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}
-          원
-        </strong>
+        <strong className="cart-item-total-price">{regx(totalPrice)}원</strong>
 
         <Button color="primary">
           <Link
