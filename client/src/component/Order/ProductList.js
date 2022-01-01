@@ -17,7 +17,7 @@ const ProductList = ({ product, amount }) => {
     } else {
       return product.l_price * amount
     }
-  }, [product, amount])
+  }, [product.l_price, product.product_count, amount])
 
   const amountStyle = useMemo(() => {
     if (amount > product.product_count) {
