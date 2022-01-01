@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom'
 import '../../scss/board/board.scss'
 
 const CommunityCategory = () => {
-  console.log('CommunityCategory')
   return (
     <div className="community-category">
       <ul className="community-category-list">
